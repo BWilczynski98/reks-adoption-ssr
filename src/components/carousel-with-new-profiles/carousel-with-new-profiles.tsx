@@ -18,7 +18,7 @@ export const CarouselWithNewAnimalProfiles = ({ animals }: Props) => {
           <h3 className="text-2xl md:text-3xl font-medium tracking-wider text-slate-800/85">Nasi podopieczni</h3>
           <Link href="/adoptuj" className="pointer">
             <p className="text-sm md:text-base text-slate-500 flex items-center space-x-1">
-              <span>Zobacz wszystkie</span> <ChevronsRight className="w-4 h-4 md:w-6 md:h-6" />
+              <span>Zobacz wszystkich</span> <ChevronsRight className="w-4 h-4 md:w-6 md:h-6" />
             </p>
           </Link>
         </div>
