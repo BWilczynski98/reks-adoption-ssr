@@ -1,14 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import logoPic from "../../logo.png";
 import { Button } from "../../../components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "../../../components/ui/dropdown-menu";
-import { Menu } from "lucide-react";
+import logoPic from "../../logo.png";
 
 type LinksType = {
   label: string;
@@ -34,7 +27,7 @@ export function Navbar() {
         <ul className="hidden md:block md:space-x-4">
           {links.map(({ label, href }, i) => (
             <Button asChild key={i} variant="ghost">
-              <a href={href}>{label}</a>
+              <Link href={href}>{label}</Link>
             </Button>
           ))}
         </ul>
