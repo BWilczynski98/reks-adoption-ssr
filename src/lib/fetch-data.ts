@@ -1,6 +1,6 @@
 async function getAnimals() {
   const res = await fetch("https://reks-manager-xkpx3.ondigitalocean.app/api/public/animals/", {
-    next: { revalidate: 150 },
+    next: { revalidate: 120 },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -12,7 +12,7 @@ async function getAnimals() {
 async function getAnimalBySlug(slug: string) {
   console.log(`getAnimalBySlug: ${slug}}`);
   const res = await fetch(`https://reks-manager-xkpx3.ondigitalocean.app/api/public/animal/${slug}/`, {
-    next: { revalidate: 150 },
+    next: { revalidate: 120 },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch data");
