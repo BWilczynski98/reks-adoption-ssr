@@ -1,18 +1,8 @@
-import { AnimalTile } from "@/app/adoptuj/components/animal-tile/animal-tile";
-
-async function getData() {
-  const res = await fetch("https://reks-manager-xkpx3.ondigitalocean.app/api/public/animals/", {
-    next: { revalidate: 100 },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import { AnimalTile } from "@/components";
+import { getAnimals } from "@/lib/fetch-data";
 
 export default async function AvailableForAdoption() {
-  const data: Animal[] = await getData();
+  const data: Animal[] = await getAnimals();
   return (
     <section className="container space-y-10">
       <div>

@@ -1,21 +1,11 @@
-import { CarouselWithNewAnimalProfiles } from "@/app/components/carousel-with-new-profiles/carousel-with-new-profiles";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Landmark, MapPin, PawPrint, PhoneCall } from "lucide-react";
-import Image from "next/image";
-import heroPic from "../app/hero.png";
+import { Mail, MapPin, PawPrint, PhoneCall } from "lucide-react";
 import Link from "next/link";
-
-async function getData() {
-  const res = await fetch("https://reks-manager-xkpx3.ondigitalocean.app/api/public/animals/", {
-    next: { revalidate: 100 },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
+import Image from "next/image";
+import heroPic from "./hero.png";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getAnimals } from "@/lib/fetch-data";
+import { CarouselWithNewAnimalProfiles, Donation } from "@/components";
 
 function Hero() {
   return (
@@ -51,34 +41,29 @@ function Hero() {
 function FAQ() {
   const FAQ_CONTENT = [
     {
-      question: "Jak mogę adoptować zwierzę ze schroniska?",
+      question: "Jak mogę adoptować zwierzę?",
       answer:
-        "Aby adoptować zwierzę ze schroniska, należy najpierw wypełnić formularz adopcyjny i przejść przez proces adopcyjny. Prosimy o wizytę w schronisku, aby poznać zwierzę i omówić wszelkie szczegóły z naszym zespołem.",
+        "Aby adoptować zwierzę, należy przejść przez proces adopcyjny. Prosimy o wizytę w stowarzyszeniu, aby poznać zwierzę i omówić wszelkie szczegóły z naszym zespołem.",
     },
     {
-      question: "Czy zwierzęta w schronisku są szczepione i odrobaczone?",
+      question: "Czy zwierzęta są szczepione i odrobaczone?",
       answer:
-        "Tak, wszystkie zwierzęta w naszym schronisku są szczepione i odrobaczone zgodnie z naszym harmonogramem weterynaryjnym. Zapewniamy, że zwierzęta są w jak najlepszym stanie zdrowia przed adopcją.",
+        "Tak, wszystkie zwierzęta w naszym stowarzyszeniu są szczepione i odrobaczone zgodnie z naszym harmonogramem weterynaryjnym. Zapewniamy, że zwierzęta są w jak najlepszym stanie zdrowia przed adopcją.",
     },
     {
-      question: "Czy schronisko przyjmuje darowizny?",
+      question: "Czy stowarzyszenie przyjmuje darowizny?",
       answer:
-        "Tak, schronisko z przyjemnością przyjmuje darowizny. Wsparcie finansowe, artykuły dla zwierząt i inne formy pomocy są zawsze mile widziane. Możesz dowiedzieć się więcej o sposobach wsparcia na naszej stronie internetowej.",
+        "Tak, stowarzyszenie z przyjemnością przyjmuje darowizny. Wsparcie finansowe, artykuły dla zwierząt i inne formy pomocy są zawsze mile widziane.",
     },
     {
-      question: "Czy schronisko organizuje wydarzenia adopcyjne?",
+      question: "Czy stowarzyszenie organizuje wydarzenia adopcyjne?",
       answer:
-        "Tak, regularnie organizujemy wydarzenia adopcyjne, aby pomóc zwierzętom znaleźć nowy dom. Informacje o planowanych wydarzeniach są publikowane na naszej stronie internetowej i mediach społecznościowych.",
+        "Tak, regularnie organizujemy wydarzenia adopcyjne, aby pomóc zwierzętom znaleźć nowy dom. Informacje o planowanych wydarzeniach są publikowane na naszych mediach społecznościowych.",
     },
     {
       question: "Jak mogę zgłosić znalezienie lub zgubienie zwierzęcia?",
       answer:
-        "Jeśli znalazłeś zgubione zwierzę lub zgubiłeś swojego pupila, prosimy o kontakt z naszym schroniskiem lub sprawdzenie naszej strony internetowej, gdzie zamieszczamy informacje o zwierzętach znalezionych lub zaginionych.",
-    },
-    {
-      question: "Czy schronisko oferuje usługi weterynaryjne dla zwierząt?",
-      answer:
-        "Nasze schronisko oferuje podstawowe usługi weterynaryjne dla zwierząt przebywających w naszej opiece. Jednak zalecamy skonsultowanie się z lokalnym weterynarzem w sprawach specjalistycznych lub pilnych potrzebach zdrowotnych.",
+        "Jeśli znalazłeś zgubione zwierzę lub zgubiłeś swojego pupila, prosimy o kontakt z naszym stowarzyszeniem.",
     },
   ];
 
@@ -103,21 +88,25 @@ function FAQ() {
 
 function Contact() {
   return (
-    <section className="bg-secondary py-10" id="kontakt">
+    <section className="py-10" id="kontakt">
       <div className="container">
         <h3 className="text-2xl md:text-3xl font-medium tracking-wider text-slate-800/85">Kontakt</h3>
         <div className="py-4 space-y-2">
-          <div className="flex items-baseline space-x-2">
+          <div className="flex items-center space-x-2">
             <PhoneCall className="text-primary w-4 h-4" />
-            <p>Telefon: 666 386 567</p>
+            <a className="text-primary" href="tel:+48666386567">
+              666 386 567
+            </a>
           </div>
-          <div className="flex items-baseline space-x-2">
+          <div className="flex items-center space-x-2">
+            <Mail className="text-primary w-4 h-4" />
+            <a href="mailto:reks-malbork@wp.pl" className="text-primary">
+              reks-malbork@wp.pl
+            </a>
+          </div>
+          <div className="flex items-center space-x-2">
             <MapPin className="text-primary w-4 h-4" />
-            <p>Adres: Kotarbińskiego 2D/2, 82-200 Malbork</p>
-          </div>
-          <div className="flex items-baseline space-x-2">
-            <Landmark className="text-primary w-4 h-4" />
-            <p>Nr konta bankowego: 50 1440 1026 0000 0000 0452 8344</p>
+            <p>Kotarbińskiego 2D/2, 82-200 Malbork</p>
           </div>
         </div>
       </div>
@@ -126,13 +115,14 @@ function Contact() {
 }
 
 export default async function Home() {
-  const data = await getData();
+  const data = await getAnimals();
   const lastAdded = data.slice(0, 10);
   return (
     <main>
       <Hero />
       <CarouselWithNewAnimalProfiles animals={lastAdded} />
       <FAQ />
+      <Donation />
       <Contact />
     </main>
   );

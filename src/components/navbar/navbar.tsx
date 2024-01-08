@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../../../components/ui/button";
-import logoPic from "../../logo.png";
+
+import logoPic from "./logo.png";
+import { Button } from "../ui/button";
 
 type LinksType = {
   label: string;
@@ -11,10 +12,11 @@ type LinksType = {
 const links: LinksType[] = [
   { label: "Zwierzęta do adopcji", href: "/adoptuj" },
   { label: "FAQ", href: "/#faq" },
+  { label: "Darowizny", href: "/#darowizny" },
   { label: "Kontakt", href: "/#kontakt" },
 ];
 
-export function Navbar() {
+export const Navbar = () => {
   return (
     <nav className="flex items-center justify-between py-4 px-4 md:px-8 lg:px-12 xl:px-16 border-b border-slate-200 mb-8 shadow-md">
       <div>
@@ -32,11 +34,15 @@ export function Navbar() {
           ))}
         </ul>
         <Button asChild>
-          <Link href="https://www.ratujemyzwierzaki.pl/skarbonkadlareksa" className="tracking-widest" target="_blank">
+          <Link
+            href="https://www.ratujemyzwierzaki.pl/reksmalbork?fbclid=IwAR2ARsqD7Wc0JFI64rcZB5sH6SlBatL8XVKZXS5N9Dpvf0Jrd8PzWal6_fI"
+            className="tracking-widest"
+            target="_blank"
+          >
             Zbiórka
           </Link>
         </Button>
       </div>
     </nav>
   );
-}
+};

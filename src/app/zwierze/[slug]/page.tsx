@@ -1,6 +1,7 @@
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
+import { getAnimalBySlug } from "@/lib/fetch-data";
 import { formatAge, formatAnimalSize, formatCapitalizeFirstLetter, formatGender } from "@/lib/format";
 import { Check, X } from "lucide-react";
 import Image from "next/image";
@@ -8,17 +9,6 @@ import Image from "next/image";
 type Props = {
   params: { slug: string };
 };
-
-async function getData() {
-  const res = await fetch("https://reks-manager-xkpx3.ondigitalocean.app/api/public/animals/", {
-    next: { revalidate: 100 },
-  });
-  if (!res.ok) {
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
-}
 
 type AnimalProfilePropsType = {
   animal: Animal;
@@ -140,12 +130,12 @@ function AnimalProfile({ animal }: AnimalProfilePropsType) {
 }
 
 export default async function Page({ params }: Props) {
-  const data: Animal[] = await getData();
-  const animal = data.find((item) => item.slug === params.slug);
+  const data: Animal = await getAnimalBySlug(params.slug);
+
   return (
     <section className="px-2 md:px-0 md:container">
-      {animal ? (
-        <AnimalProfile animal={animal} />
+      {data ? (
+        <AnimalProfile animal={data} />
       ) : (
         <p className="text-center">Profil {params.slug} nie jest już dostępny lub nie istnieje.</p>
       )}
