@@ -3,7 +3,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   const restLetters = params.slug.slice(1);
   const name = firstLetter + restLetters;
   return {
-    title: `Zwierze ${name}`,
+    title: `${name}`,
   };
 }
 
