@@ -4,6 +4,7 @@ import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { EmptyImage } from "..";
 
 type Props = {
   data: Animal;
@@ -12,14 +13,18 @@ type Props = {
 export const AnimalTile = ({ data }: Props) => {
   return (
     <div className="relative aspect-[3/4] rounded-lg overflow-hidden">
-      <Image
-        src={data.image}
-        fill
-        alt={`Zdjęcie profilowe zwierzęcia ${data.name}`}
-        priority={true}
-        className="rounded-lg transition-opacity opacity-0 duration-[2s]"
-        onLoadingComplete={(image) => image.classList.remove("opacity-0")}
-      />
+      {data.image ? (
+        <Image
+          src={data.image}
+          fill
+          alt={`Zdjęcie profilowe zwierzęcia ${data.name}`}
+          priority={true}
+          className="rounded-lg transition-opacity opacity-0 duration-[2s]"
+          onLoadingComplete={(image) => image.classList.remove("opacity-0")}
+        />
+      ) : (
+        <EmptyImage />
+      )}
       <div className="absolute bottom-0 bg-gradient-to-t from-slate-900 to-slate-900/[1%] w-full px-2 py-4 flex items-end justify-between h-1/3">
         <div>
           <h2 className="text-xl font-semibold text-slate-50">{data.name}</h2>

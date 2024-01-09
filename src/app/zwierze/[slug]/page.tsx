@@ -1,9 +1,10 @@
+import { EmptyImage } from "@/components";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { getAnimalBySlug } from "@/lib/fetch-data";
 import { formatAge, formatAnimalSize, formatCapitalizeFirstLetter, formatGender } from "@/lib/format";
-import { Check, X } from "lucide-react";
+import { CameraOff, Check, X } from "lucide-react";
 import Image from "next/image";
 
 type Props = {
@@ -27,13 +28,19 @@ function AnimalProfile({ animal }: AnimalProfilePropsType) {
     <Card className="mb-10">
       <CardContent className="space-y-10 xl:flex xl:space-x-10 xl:space-y-0 py-10">
         <div className="basis-1/4">
-          <Image
-            src={animal.image}
-            width={350}
-            height={300}
-            alt={`Zdjęcie profilowe zwierzęcia ${animal.name}`}
-            className="rounded-lg"
-          />
+          {animal.image ? (
+            <Image
+              src={animal.image}
+              width={350}
+              height={300}
+              alt={`Zdjęcie profilowe zwierzęcia ${animal.name}`}
+              className="rounded-lg"
+            />
+          ) : (
+            <div className="bg-slate-300/50 h-[300px] w-[350px] flex items-center justify-center rounded-lg">
+              <CameraOff className="w-8 h-8 text-slate-500" />
+            </div>
+          )}
         </div>
         <div className="basis-3/4 space-y-6">
           <div className="mb-10">
