@@ -3,8 +3,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { ChevronRight, ChevronsRight } from "lucide-react";
+import { CameraOff, ChevronRight, ChevronsRight } from "lucide-react";
 import Link from "next/link";
+import { EmptyImage } from "..";
 
 type Props = {
   animals: Animal[];
@@ -30,7 +31,17 @@ export const CarouselWithNewAnimalProfiles = ({ animals }: Props) => {
                 <div className="p-1">
                   <Card className="overflow-hidden">
                     <CardContent className="flex aspect-[3/4] items-center justify-center p-6 relative ">
-                      <Image src={item.image} fill alt={`Zdjęcie profilowe zwierzęcia ${item.name}`} priority={true} />
+                      {item.image ? (
+                        <Image
+                          src={item.image}
+                          fill
+                          alt={`Zdjęcie profilowe zwierzęcia ${item.name}`}
+                          priority={true}
+                        />
+                      ) : (
+                        <EmptyImage />
+                      )}
+
                       <div className="absolute bottom-0 bg-gradient-to-t from-slate-900 to-slate-900/[1%] w-full px-2 py-4 flex items-end justify-between h-1/3">
                         <div>
                           <h2 className="text-xl font-semibold text-slate-50">{item.name}</h2>
