@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import logoPic from "./logo.png";
+import { Facebook, Instagram } from "lucide-react";
 import { Button } from "../ui/button";
+import logoPic from "./logo.png";
 
 type LinksType = {
   label: string;
@@ -40,6 +41,16 @@ export const Navbar = () => {
             target="_blank"
           >
             Zbiórka
+          </Link>
+        </Button>
+        <Button size="icon" variant={"ghost"} asChild>
+          <Link href="https://www.facebook.com/MalborskieStowarzyszenieReks/" target="_blank">
+            <Facebook className="text-slate-500" />
+          </Link>
+        </Button>
+        <Button size="icon" variant={"ghost"} asChild>
+          <Link href="https://www.instagram.com/reks.malbork/" target="_blank">
+            <Instagram className="text-slate-500" />
           </Link>
         </Button>
       </div>

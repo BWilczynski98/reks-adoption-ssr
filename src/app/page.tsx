@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Mail, MapPin, PawPrint, PhoneCall } from "lucide-react";
-import Link from "next/link";
-import Image from "next/image";
-import heroPic from "./hero.png";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { getAnimals } from "@/lib/fetch-data";
 import { CarouselWithNewAnimalProfiles, Donation } from "@/components";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { getAnimals } from "@/lib/fetch-data";
+import { Facebook, Instagram, Mail, MapPin, PawPrint, PhoneCall } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import heroPic from "./hero.png";
 
 function Hero() {
   return (
@@ -60,11 +60,6 @@ function FAQ() {
       answer:
         "Tak, regularnie organizujemy wydarzenia adopcyjne, aby pomóc zwierzętom znaleźć nowy dom. Informacje o planowanych wydarzeniach są publikowane na naszych mediach społecznościowych.",
     },
-    {
-      question: "Jak mogę zgłosić znalezienie lub zgubienie zwierzęcia?",
-      answer:
-        "Jeśli znalazłeś zgubione zwierzę lub zgubiłeś swojego pupila, prosimy o kontakt z naszym stowarzyszeniem.",
-    },
   ];
 
   return (
@@ -80,6 +75,20 @@ function FAQ() {
               </AccordionItem>
             );
           })}
+          <AccordionItem value="Zagubione">
+            <AccordionTrigger>Jak mogę zgłosić znalezienie lub zgubienie zwierzęcia?</AccordionTrigger>
+            <AccordionContent>
+              Jeśli znalazłeś zgubione zwierzę lub zgubiłeś swojego pupila zgłoś to poprzez naszą grupe{" "}
+              <Link
+                href="https://www.facebook.com/groups/920156211913804?locale=pl_PL"
+                className="text-blue-500 font-semibold"
+                target="_blank"
+              >
+                facebook
+              </Link>
+              .
+            </AccordionContent>
+          </AccordionItem>
         </Accordion>
       </div>
     </section>
@@ -107,6 +116,27 @@ function Contact() {
           <div className="flex items-center space-x-2">
             <MapPin className="text-primary w-4 h-4" />
             <p>Kotarbińskiego 2D/2, 82-200 Malbork</p>
+          </div>
+        </div>
+        <div>
+          <h4 className="text-xl">Zaobserwuj nasze Social Media</h4>
+          <div className="space-y-2 py-2">
+            <div className="flex items-center space-x-2">
+              <Facebook className="text-primary w-4 h-4" />
+              <Link
+                href="https://www.facebook.com/MalborskieStowarzyszenieReks/"
+                target="_blank"
+                className="text-primary"
+              >
+                Facebook
+              </Link>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Instagram className="text-primary w-4 h-4" />
+              <Link href="https://www.instagram.com/reks.malbork/" target="_blank" className="text-primary">
+                Instagram
+              </Link>
+            </div>
           </div>
         </div>
       </div>
