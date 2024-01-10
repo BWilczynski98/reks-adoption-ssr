@@ -10,10 +10,10 @@ async function getAnimals() {
 }
 
 async function getAnimalBySlug(slug: string) {
-  console.log(`getAnimalBySlug: ${slug}}`);
   const res = await fetch(`https://reks-manager-xkpx3.ondigitalocean.app/api/public/animal/${slug}/`, {
-    next: { revalidate: 120 },
+    cache: "no-store",
   });
+
   if (!res.ok) {
     throw new Error("Failed to fetch data");
   }
