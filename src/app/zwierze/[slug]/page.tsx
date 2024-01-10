@@ -141,11 +141,7 @@ export default async function Page({ params }: Props) {
 
   return (
     <section className="px-2 md:px-0 md:container">
-      {data ? (
-        <AnimalProfile animal={data} />
-      ) : (
-        <p className="text-center">Profil {params.slug} nie jest już dostępny lub nie istnieje.</p>
-      )}
+      <AnimalProfile animal={data} />
     </section>
   );
 }
