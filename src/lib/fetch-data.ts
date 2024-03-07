@@ -1,5 +1,5 @@
 async function getAnimals() {
-  const res = await fetch("https://reks-manager-xkpx3.ondigitalocean.app/api/public/animals/", {
+  const res = await fetch("https://reks-manager-6tlcn.ondigitalocean.app/api/public/animals/", {
     next: { revalidate: 120 },
   });
   if (!res.ok) {
@@ -10,7 +10,7 @@ async function getAnimals() {
 }
 
 async function getAnimalBySlug(slug: string) {
-  const res = await fetch(`https://reks-manager-xkpx3.ondigitalocean.app/api/public/animal/${slug}/`, {
+  const res = await fetch(`https://reks-manager-6tlcn.ondigitalocean.app/api/public/animal/${slug}/`, {
     cache: "no-store",
   });
 
